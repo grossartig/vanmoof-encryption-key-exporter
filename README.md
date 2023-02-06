@@ -14,20 +14,20 @@ vanoof.grossartig.io does not store any personal data. Our server acts as a prox
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+## Run
 ```
+npm install
+```
+```
+npm run build
+```
+```
+npm run start
+```
+The server should now be listening on http://localhost:3000
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
 ## Legal bits
-
-This project is licensed under GNU GPLv3.
+This project is licensed under GNU GPLv3

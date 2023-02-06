@@ -1,7 +1,7 @@
 FROM node:18-alpine
 
 # RUN apk update
-RUN apk add --no-cache bind-tools libc6-compat
+RUN apk add --no-cache libc6-compat
 
 WORKDIR /app
 COPY package*.json ./

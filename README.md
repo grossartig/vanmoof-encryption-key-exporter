@@ -1,3 +1,17 @@
+# VanMoof Encryption Key Exporter
+
+## About
+
+Unfortunately, in recent days news have come up saying VanMoof isn’t in a very good financial state and had to be rescued in December 2022 by a number of unnamed investors, [source](https://archive.ph/ivRfD).
+
+The Bluetooth connection between your smartphone and your VanMoof is encrypted for security purposes. Each time you log into your VanMoof account, this encryption key is being downloaded from VanMoof’s server. If these servers will go offline one day - for whatever reason - the encryption keys are lost forever and you have no way of communicating with your bike.
+
+With this, we want to make sure everyone can use their VanMoof even after these servers become unreachable.
+
+You can either use our tool on vanoof.grossartig.io or build it yourself.
+
+vanoof.grossartig.io does not store any personal data. Our server acts as a proxy to VanMoof's API as it only allows Access-Control-Allow-Origin: * headers.
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
@@ -14,25 +28,6 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Legal bits
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
-
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This project is licensed under GNU GPLv3.

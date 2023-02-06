@@ -12,9 +12,6 @@ You can either use our tool on vanoof.grossartig.io or build it yourself.
 
 vanoof.grossartig.io does not store any personal data. Our server acts as a proxy to VanMoof's API as it only allows Access-Control-Allow-Origin: * headers.
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-
 ## Run
 ```
 npm install

@@ -1,1 +1,0 @@
-# vanmoof-encryption-key-exporter

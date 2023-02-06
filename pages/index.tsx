@@ -158,11 +158,11 @@ export default function Home() {
 						{bikes && <div>
 							<Button variant="contained" onClick={() => {
 								setBikes(null)
-								setToken(null)
+								setToken("")
 							}}>Logout</Button>
 							{bikes.map((bike) => {
 								return (
-									<div>
+									<div key={bike.name + "-" + bike.bikeId}>
 										<h4>{bike.name}</h4>
 										<ul>
 											<li>MAC Address: <code>{bike.macAddress}</code></li>

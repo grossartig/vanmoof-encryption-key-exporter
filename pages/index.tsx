@@ -15,6 +15,7 @@ import Button from '@mui/material/Button';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
+import Stack from '@mui/material/Stack';
 
 export default function Home() {
 	const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -189,18 +190,25 @@ export default function Home() {
 									</div>
 								)
 							})}
-							<Button variant="contained" onClick={() => {
-								function download(filename: string, content: string) {
-									var element = document.createElement('a')
-									element.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(content))
-									element.setAttribute('download', filename)
-									element.style.display = 'none'
-									document.body.appendChild(element)
-									element.click()
-									document.body.removeChild(element)
-								}
-								download("bikeData_" + (new Date()).toISOString().replaceAll(":", "-") + ".json", JSON.stringify(bikes))
-							}}>Download</Button>
+							<Stack spacing={1} direction="row">
+								<Button variant="contained" onClick={() => {
+									function download(filename: string, content: string) {
+										var element = document.createElement('a')
+										element.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(content))
+										element.setAttribute('download', filename)
+										element.style.display = 'none'
+										document.body.appendChild(element)
+										element.click()
+										document.body.removeChild(element)
+									}
+									download("bikeData_" + (new Date()).toISOString().replaceAll(":", "-") + ".json", JSON.stringify(bikes))
+								}}>Download</Button>
+								<Button variant="outlined" onClick={() => {
+									if (typeof window === "object") {
+										window.print()
+									}
+								}}>Print</Button>
+							</Stack>
 						</div>}
 						<footer style={{ textAlign: "center", marginTop: "60px" }}>
 							<Link href="https://grossartig.io/keyexport/legalnotice">Legal Notice (Impressum)</Link>&nbsp;-&nbsp;<Link href="https://grossartig.io/keyexport/privacy">Privacy Policy</Link>

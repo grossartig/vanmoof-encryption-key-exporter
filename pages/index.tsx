@@ -16,6 +16,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
+import Script from 'next/script';
 
 export default function Home() {
 	const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -97,7 +98,8 @@ export default function Home() {
 				<meta name="description" content="VanMoof Encryption Key Exporter" />
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				{/* <link rel="icon" href="/favicon.ico" /> */}
-				<script defer data-domain="vanoof.grossartig.io" src="https://plausible.grossartig.io/js/script.js"></script>
+				{/* <script defer data-domain="vanoof.grossartig.io" src="https://plausible.grossartig.io/js/script.js"></script> */}
+				<Script defer data-domain="vanoof.grossartig.io" src="https://plausible.grossartig.io/js/script.js" />
 			</Head>
 			<ThemeProvider theme={theme}>
 				<CssBaseline />

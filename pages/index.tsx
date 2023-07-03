@@ -58,7 +58,11 @@ export default function Home() {
 			} = await res.json()
 			return data
 		}
-		setToken((await getToken(username, password)).token)
+		try {
+			setToken((await getToken(username, password)).token)
+		} catch (e) {
+			setErrorLogin(true)
+		}
 	}
 
 	useEffect(() => {
@@ -141,6 +145,7 @@ export default function Home() {
 														setPassword(e.target.value)
 														setErrorLogin(false)
 													}}
+													helperText={errorLogin && "Login failed. Try again."}
 												/>
 											</Grid>
 											<Grid item xs={12}>

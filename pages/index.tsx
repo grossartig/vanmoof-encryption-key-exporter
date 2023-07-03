@@ -12,6 +12,9 @@ import Typography from "@mui/material/Typography"
 import { useEffect, useMemo, useState } from 'react';
 import { bikeDetails, getCustomerData } from './api/typesAndInterfaces';
 import Button from '@mui/material/Button';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from '@mui/material/Checkbox';
+import Link from '@mui/material/Link';
 
 export default function Home() {
 	const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -37,6 +40,7 @@ export default function Home() {
 	const [errorPassword, setErrorPassword] = useState("")
 	const [errorLogin, setErrorLogin] = useState(false)
 	const [formDisabled, setFormDisabled] = useState(false)
+	const [privacyPolicyAgreed, setPrivacyPolicyAgreed] = useState<boolean>(false)
 
 	const handleSubmit = async (e: any) => {
 		e.preventDefault()
@@ -93,7 +97,7 @@ export default function Home() {
 				<CssBaseline />
 				<main>
 					<div className={styles.main}>
-						<h1>VanMoof Encryption Key Exporter</h1>
+						<h1 style={{ textAlign: "center" }}>VanMoof Encryption Key Exporter</h1>
 						{!bikes && <div>
 							<Container maxWidth="sm">
 								<Box sx={{
@@ -102,7 +106,7 @@ export default function Home() {
 									flexDirection: 'column',
 									alignItems: 'center',
 								}}>
-									<Typography component="h1" variant="h5">Anmelden</Typography>
+									<Typography component="h1" variant="h5">Sign in with your VanMoof credentials.</Typography>
 									<Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
 										<Grid container spacing={2}>
 											<Grid item xs={12}>
@@ -111,7 +115,7 @@ export default function Home() {
 													required
 													fullWidth
 													id="username"
-													label="Benutzername"
+													label="Username"
 													name="username"
 													autoComplete="username"
 													error={errorLogin}
@@ -127,7 +131,7 @@ export default function Home() {
 													required
 													fullWidth
 													name="password"
-													label="Passwort"
+													label="Password"
 													type="password"
 													id="password"
 													autoComplete="password"
@@ -140,8 +144,15 @@ export default function Home() {
 												/>
 											</Grid>
 											<Grid item xs={12}>
+												<FormControlLabel control={<Checkbox onChange={() => {
+													setPrivacyPolicyAgreed(!privacyPolicyAgreed)
+												}} checked={privacyPolicyAgreed} />} label={<>
+													I agree to the <Link href="https://grossartig.io/keyexport/privacy" target="_blank">data privacy policy</Link>.
+												</>} />
+											</Grid>
+											<Grid item xs={12}>
 												<Button
-													disabled={formDisabled}
+													disabled={formDisabled || !privacyPolicyAgreed}
 													type="submit"
 													fullWidth
 													variant="contained"
@@ -186,6 +197,13 @@ export default function Home() {
 								download("bikeData_" + (new Date()).toISOString().replaceAll(":", "-") + ".json", JSON.stringify(bikes))
 							}}>Download</Button>
 						</div>}
+						<footer style={{ textAlign: "center", marginTop: "60px" }}>
+							<Link href="https://grossartig.io/keyexport/legalnotice">Legal Notice (Impressum)</Link>&nbsp;-&nbsp;<Link href="https://grossartig.io/keyexport/privacy">Privacy Policy</Link>
+							<br /><br />
+							This project is <Link href="https://github.com/grossartig/vanmoof-encryption-key-exporter" target="_blank">open source</Link>.
+							<br /><br />
+							&copy; grossartig.io, 2023
+						</footer>
 					</div>
 				</main>
 			</ThemeProvider>

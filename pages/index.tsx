@@ -93,7 +93,7 @@ export default function Home() {
 				<CssBaseline />
 				<main>
 					<div className={styles.main}>
-						<h1>Vanmoof Encryption Key Exporter</h1>
+						<h1>VanMoof Encryption Key Exporter</h1>
 						{!bikes && <div>
 							<Container maxWidth="sm">
 								<Box sx={{

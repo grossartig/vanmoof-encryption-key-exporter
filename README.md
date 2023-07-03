@@ -16,9 +16,15 @@ vanoof.grossartig.io does not store any personal data. Our server acts as a prox
 ```
 docker-compose up -d
 ```
+or 
+```
+docker compose up -d
+```
 The server should now be listening on http://localhost:3000
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+Optional: Use reverse proxy to show this on the default http(s) port, 80/443.
 ## Run - NPM
 ```
 npm install
@@ -32,6 +38,8 @@ npm run start
 The server should now be listening on http://localhost:3000
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+Optional: Use reverse proxy to show this on the default http(s) port, 80/443.
 
 ## Legal bits
 This project is licensed under GNU GPLv3. 

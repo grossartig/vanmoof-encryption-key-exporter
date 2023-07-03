@@ -17,6 +17,7 @@ import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Script from 'next/script';
+// import PlausibleProvider from 'next-plausible';
 
 export default function Home() {
 	const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -102,6 +103,7 @@ export default function Home() {
 			<Script defer data-domain="vanoof.grossartig.io" src="https://plausible.grossartig.io/js/script.js" />
 			<ThemeProvider theme={theme}>
 				<CssBaseline />
+				{/* <PlausibleProvider domain="vanoof.grossartig.io" customDomain="https://plausible.grossartig.io" /> */}
 				<main>
 					<div className={styles.main}>
 						<h1 style={{ textAlign: "center" }}>VanMoof Encryption Key Exporter</h1>

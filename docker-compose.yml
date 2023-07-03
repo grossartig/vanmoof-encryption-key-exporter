@@ -6,4 +6,4 @@ services:
     restart: unless-stopped
     container_name: vanmoof-key-exporter
     ports:
-      - "3000:3000"
+      - "127.0.0.1:3000:3000"

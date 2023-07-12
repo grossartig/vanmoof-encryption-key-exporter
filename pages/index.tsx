@@ -198,18 +198,29 @@ export default function Home() {
 								setBikes(null)
 								setToken("")
 							}}>Logout</Button>
-							{bikes.map((bike) => {
-								return (
-									<div key={bike.name + "-" + bike.bikeId}>
-										<h4>{bike.name}</h4>
-										<ul>
-											<li>MAC Address: <code>{bike.macAddress}</code></li>
-											<li>Encryption Key: <code>{bike.key.encryptionKey}</code></li>
-											<li>Passcode: <code>{bike.key.passcode}</code></li>
-											<li>User Key ID: <code>{bike.key.userKeyId}</code></li>
-										</ul>
-									</div>
-								)
+							{(() => {console.log(typeof bikes, bikes); return null})()}
+							{typeof bikes !== "string" && bikes.map((bike) => {
+								try {
+									return (
+										<div key={bike.name + "-" + bike.bikeId}>
+											<h4>{bike.name}</h4>
+											<ul>
+												{ bike?.frameNumber && <li>Frame Number: <code>{bike.frameNumber}</code></li> }
+												{ bike?.frameSerial && <li>Frame Serial: <code>{bike.frameSerial}</code></li> }
+												{ bike?.macAddress && <li>MAC Address: <code>{bike.macAddress}</code></li> }
+												{ bike?.key?.encryptionKey && <li>Encryption Key: <code>{bike.key.encryptionKey}</code></li> }
+												{ bike?.key?.passcode && <li>Passcode: <code>{bike.key.passcode}</code></li> }
+												{ bike?.key?.userKeyId && <li>User Key ID: <code>{bike.key.userKeyId}</code></li> }
+												{ !bike?.key && <li>
+													Your bike seems to have a currently not supported mechanism for connecting to it.
+													We are aware of this and are working on supporting these bike models. Please come
+													back in a few days.
+												</li> }
+											</ul>
+										</div>
+									)
+								} catch (e) { console.log(e) }
+								return null
 							})}
 							<Stack spacing={1} direction="row">
 								<Button variant="contained" onClick={() => {

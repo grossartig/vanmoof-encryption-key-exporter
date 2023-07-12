@@ -244,7 +244,7 @@ export default function Home() {
 							<h2>What to do with this file</h2>
 							<p>
 								You should definetely download the data from the site with the download button. It contains information
-								about your bike(s). If you get a message that your bike isn't supported yet, come back in a few days
+								about your bike(s). If you get a message that your bike isn&apos;t supported yet, come back in a few days
 								and try downloading it again.<br />
 								The idea behind this site is, that you can import this bike data into future 3rd party apps in
 								order to connect to your bike. Meanwhile, just hold on to this file.

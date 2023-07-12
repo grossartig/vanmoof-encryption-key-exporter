@@ -8,9 +8,9 @@ The Bluetooth connection between your smartphone and your VanMoof is encrypted f
 
 With this tool, we want to make sure everyone can use their VanMoof even after these servers become unreachable - preventing e-waste.
 
-We encourage self hosting this tool, however, if you do not have the technical resources, you can use the version hosted on our server at [https://vanoof.grossartig.io](vanoof.grossartig.io)
+We encourage self hosting this tool, however, if you do not have the technical resources, you can use the version hosted on our server at [https://vanmoof.grossartig.io](https://vanmoof.grossartig.io)
 
-vanoof.grossartig.io does not store any personal data. Our server acts as a proxy to VanMoof's API as it only allows Access-Control-Allow-Origin: * headers.
+vanmoof.grossartig.io does not store any personal data. Our server acts as a proxy to VanMoof's API as it only allows Access-Control-Allow-Origin: * headers.
 
 ## Run - Docker Compose (recommended)
 ```

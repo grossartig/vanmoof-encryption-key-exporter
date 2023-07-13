@@ -34,6 +34,7 @@ import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Script from 'next/script';
+import Snackbar from '@mui/material/Snackbar';
 // import PlausibleProvider from 'next-plausible';
 
 export default function Home() {
@@ -61,6 +62,7 @@ export default function Home() {
 	const [errorLogin, setErrorLogin] = useState(false)
 	const [formDisabled, setFormDisabled] = useState(false)
 	const [privacyPolicyAgreed, setPrivacyPolicyAgreed] = useState<boolean>(false)
+	const [easteregg, setEasteregg] = useState<number>(0)
 
 	const handleSubmit = async (e: any) => {
 		e.preventDefault()
@@ -123,7 +125,7 @@ export default function Home() {
 				{/* <PlausibleProvider domain="vanoof.grossartig.io" customDomain="https://plausible.grossartig.io" /> */}
 				<main>
 					<div className={styles.main}>
-						<h1 style={{ textAlign: "center" }}>VanMoof Encryption Key Exporter</h1>
+						<h1 style={{ textAlign: "center" }} onClick={() => setEasteregg(easteregg + 1)}>VanMoof Encryption Key Exporter</h1>
 						{!bikes && <div>
 							<Container maxWidth="sm">
 								<Box sx={{
@@ -261,6 +263,15 @@ export default function Home() {
 							<br /><br />
 							&copy; grossartig.io, 2023
 						</footer>
+						<Snackbar
+							anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
+							open={easteregg > 4}
+							onClose={() => {
+								setEasteregg(0)
+							}}
+							message="This is an Internet-of-shit moment."
+							key={"snackbar-easteregg"}
+						/>
 					</div>
 				</main>
 			</ThemeProvider>

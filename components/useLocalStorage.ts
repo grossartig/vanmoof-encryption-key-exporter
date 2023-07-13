@@ -33,9 +33,11 @@ function useLocalStorageString(
 
 	const setState = (newState: string) => {
 		setValue(newState)
-		window.localStorage.setItem(localStorageKey, newState)
+		if (localStorageSupported) {
+			window.localStorage.setItem(localStorageKey, newState)
+		}
 	}
-	
+
 	if (firstRun && localStorageSupported) {
 		const stored = window.localStorage.getItem(localStorageKey)
 		if (stored !== null) {
@@ -44,6 +46,6 @@ function useLocalStorageString(
 			setState(initialValue || "")
 		}
 	}
-	
+
 	return [value, setState]
 }

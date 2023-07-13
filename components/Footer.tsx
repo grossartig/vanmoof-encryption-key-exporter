@@ -1,6 +1,9 @@
 import Link from '@mui/material/Link';
+import getConfig from 'next/config';
 
 export default function Footer() {
+	const { publicRuntimeConfig } = getConfig()
+
 	return (
 		<footer style={{ textAlign: "center", marginTop: "64px" }}>
 			<hr />
@@ -14,6 +17,8 @@ export default function Footer() {
 				Concept: <Link href="https://angelmann.net" target="_blank">Marius Angelmann</Link>
 				<br /><br />
 				&copy; grossartig.io, 2023
+				<br /><br />
+				Verion: v{ publicRuntimeConfig.version }
 			</div>
 		</footer>
 	)

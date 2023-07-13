@@ -7,3 +7,4 @@ Consider hosting your own instance. Feel free to open a pull
 request to add your instance to this list.
 
  - [vanoof.grossartig.io](https://vanoof.grossartig.io)
+ - [vanmoof.dral.io](https://vanmoof.dral.io)

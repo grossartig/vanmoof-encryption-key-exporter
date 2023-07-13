@@ -49,3 +49,7 @@ function useLocalStorageString(
 
 	return [value, setState]
 }
+
+export {
+	useLocalStorageString
+}

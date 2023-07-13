@@ -36,7 +36,7 @@ import Stack from '@mui/material/Stack';
 import Script from 'next/script';
 import Snackbar from '@mui/material/Snackbar';
 import { useLocalStorageString } from '@/components/useLocalStorage';
-import Footer from '@/components/footer';
+import Footer from '@/components/Footer';
 // import PlausibleProvider from 'next-plausible';
 
 export default function AccountPage() {

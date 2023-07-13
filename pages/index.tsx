@@ -2,10 +2,9 @@ import CssBaseline from "@mui/material/CssBaseline";
 import styles from '@/styles/Home.module.css'
 import Head from "next/head";
 import Script from "next/script";
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { deepOrange, indigo } from "@mui/material/colors";
+import { ThemeProvider } from '@mui/material/styles';
 import Snackbar from "@mui/material/Snackbar";
 import Footer from "@/components/Footer";
 import NextLink from "next/link";

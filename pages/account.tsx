@@ -35,6 +35,8 @@ import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Script from 'next/script';
 import Snackbar from '@mui/material/Snackbar';
+import { useLocalStorageString } from '@/components/useLocalStorage';
+import Footer from '@/components/footer';
 // import PlausibleProvider from 'next-plausible';
 
 export default function Home() {
@@ -53,7 +55,7 @@ export default function Home() {
 		[prefersDarkMode],
 	)
 
-	const [token, setToken] = useState<string>("")
+	const [token, setToken] = useLocalStorageString("vanmoofToken")
 	const [bikes, setBikes] = useState<Array<bikeDetails> | null>(null)
 	const [refresh, setRefresh] = useState<boolean>(false)
 	const [username, setUsername] = useState<string>("")
@@ -252,17 +254,7 @@ export default function Home() {
 								order to connect to your bike. Meanwhile, just hold on to this file.
 							</p>
 						</div>}
-						<footer style={{ textAlign: "center", marginTop: "60px" }}>
-							<Link href="https://grossartig.io/keyexport/legalnotice">Legal Notice (Impressum)</Link>&nbsp;&nbsp;-&nbsp;&nbsp;<Link href="https://grossartig.io/keyexport/privacy">Privacy Policy</Link>
-							<br /><br />
-							This project is <Link href="https://github.com/grossartig/vanmoof-encryption-key-exporter" target="_blank">open source</Link>.
-							<br /><br />
-							Made with &#x1F499; in Germany.<br />
-							Coding: <Link href="https://justus-d.de" target="_blank">Justus Dietrich</Link><br />
-							Concept: <Link href="https://angelmann.net" target="_blank">Marius Angelmann</Link>
-							<br /><br />
-							&copy; grossartig.io, 2023
-						</footer>
+						<Footer />
 						<Snackbar
 							anchorOrigin={{ horizontal: 'center', vertical: 'bottom' }}
 							open={easteregg > 4}

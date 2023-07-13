@@ -11,22 +11,10 @@ import Footer from "@/components/Footer";
 import NextLink from "next/link";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
+import theme from "@/components/theme";
 
 export default function Home() {
 	const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-	const theme = useMemo(
-		() =>
-			createTheme({
-				palette: {
-					primary: {
-						main: prefersDarkMode ? indigo[300] : indigo[900],
-					},
-					secondary: deepOrange,
-					mode: prefersDarkMode ? 'dark' : 'light',
-				},
-			}),
-		[prefersDarkMode],
-	)
 
 	const [easteregg, setEasteregg] = useState<number>(0)
 
@@ -39,7 +27,7 @@ export default function Home() {
 				{/* <link rel="icon" href="/favicon.ico" /> */}
 			</Head>
 			<Script defer data-domain="vanoof.grossartig.io" src="https://plausible.grossartig.io/js/script.js" />
-			<ThemeProvider theme={theme}>
+			<ThemeProvider theme={theme(prefersDarkMode)}>
 				<CssBaseline />
 				{/* <PlausibleProvider domain="vanoof.grossartig.io" customDomain="https://plausible.grossartig.io" /> */}
 				<main>

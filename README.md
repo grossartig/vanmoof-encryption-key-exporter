@@ -44,4 +44,4 @@ Optional: Use reverse proxy to show this on the default http(s) port, 80/443.
 ## Legal bits
 This project is licensed under GNU GPLv3. 
 
-Made with 💙 by @Justus-D and @mariusangelmann in Germany.
+Made with 💙 by [Justus Dietrich](https://justus-d.de) and [Marius Angelmann](https://angelmann.net) in Germany.

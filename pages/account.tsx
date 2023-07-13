@@ -39,7 +39,7 @@ import { useLocalStorageString } from '@/components/useLocalStorage';
 import Footer from '@/components/footer';
 // import PlausibleProvider from 'next-plausible';
 
-export default function Home() {
+export default function AccountPage() {
 	const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 	const theme = useMemo(
 		() =>

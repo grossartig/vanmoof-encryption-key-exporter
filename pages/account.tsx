@@ -202,7 +202,7 @@ export default function AccountPage() {
 								setBikes(null)
 								setToken("")
 							}}>Logout</Button>
-							{(() => {console.log(typeof bikes, bikes); return null})()}
+							{/* {(() => {console.log(typeof bikes, bikes); return null})()} */}
 							{typeof bikes !== "string" && bikes.map((bike) => {
 								try {
 									return (

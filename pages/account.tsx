@@ -37,6 +37,8 @@ import Script from 'next/script';
 import Snackbar from '@mui/material/Snackbar';
 import { useLocalStorageString } from '@/components/useLocalStorage';
 import Footer from '@/components/Footer';
+import Bikes from '@/components/Bikes';
+import DownloadButton from '@/components/DownloadButton';
 // import PlausibleProvider from 'next-plausible';
 
 export default function AccountPage() {
@@ -203,42 +205,13 @@ export default function AccountPage() {
 								setToken("")
 							}}>Logout</Button>
 							{/* {(() => {console.log(typeof bikes, bikes); return null})()} */}
-							{typeof bikes !== "string" && bikes.map((bike) => {
-								try {
-									return (
-										<div key={bike.name + "-" + bike.bikeId}>
-											<h4>{bike.name}</h4>
-											<ul>
-												{ bike?.frameNumber && <li>Frame Number: <code>{bike.frameNumber}</code></li> }
-												{ bike?.frameSerial && <li>Frame Serial: <code>{bike.frameSerial}</code></li> }
-												{ bike?.macAddress && <li>MAC Address: <code>{bike.macAddress}</code></li> }
-												{ bike?.key?.encryptionKey && <li>Encryption Key: <code>{bike.key.encryptionKey}</code></li> }
-												{ bike?.key?.passcode && <li>Passcode: <code>{bike.key.passcode}</code></li> }
-												{ bike?.key?.userKeyId && <li>User Key ID: <code>{bike.key.userKeyId}</code></li> }
-												{ !bike?.key && <li>
-													Your bike seems to have a currently not supported mechanism for connecting to it.
-													We are aware of this and are working on supporting these bike models. Please come
-													back in a few days.
-												</li> }
-											</ul>
-										</div>
-									)
-								} catch (e) { console.log(e) }
-								return null
-							})}
+							{typeof bikes !== "string" && <Bikes bikes={bikes} />}
 							<Stack spacing={1} direction="row">
-								<Button variant="contained" onClick={() => {
-									function download(filename: string, content: string) {
-										var element = document.createElement('a')
-										element.setAttribute('href', 'data:application/json;charset=utf-8,' + encodeURIComponent(content))
-										element.setAttribute('download', filename)
-										element.style.display = 'none'
-										document.body.appendChild(element)
-										element.click()
-										document.body.removeChild(element)
-									}
-									download("bikeData_" + (new Date()).toISOString().replaceAll(":", "-") + ".json", JSON.stringify(bikes))
-								}}>Download</Button>
+								<DownloadButton
+									filename={"bikeData_" + (new Date()).toISOString().replaceAll(":", "-") + ".json"}
+									content={JSON.stringify(bikes)}
+									buttonText="Download"
+								/>
 								<Button variant="outlined" onClick={() => {
 									if (typeof window === "object") {
 										window.print()

@@ -1,12 +1,17 @@
 import { bikeDetails } from "@/pages/api/typesAndInterfaces"
+import GenericErrorBoundary from "./GenericErrorBoundary"
+import Alert from "@mui/material/Alert"
 
 export default function Bikes(props: {
 	bikes: bikeDetails[]
+	fallback?: React.ReactNode
 }) {
-	const { bikes } = props
+	const { bikes, fallback } = props
 
-	return (<>
-		{bikes.map(bike => {
+	let parsedBikes: React.ReactNode[] | null = []
+
+	try {
+		parsedBikes.push(bikes.map(bike => {
 			try {
 				return (
 					<div key={bike.name + "-" + bike.bikeId}>
@@ -28,6 +33,10 @@ export default function Bikes(props: {
 				)
 			} catch (e) { console.log(e) }
 			return null
-		})}
-	</>)
+		}))
+	} catch {
+		return fallback || null
+	}
+
+	return parsedBikes
 }

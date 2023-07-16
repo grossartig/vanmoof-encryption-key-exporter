@@ -122,27 +122,29 @@ export default function AccountPage() {
 				<main>
 					<div className={styles.main}>
 						<h1 style={{ textAlign: "center" }} onClick={() => setEasteregg(easteregg + 1)}>VanMoof Encryption Key Exporter</h1>
-						<Button
-							href="/"
-							LinkComponent={NextLink}
-							variant="outlined"
-							style={{ textAlign: "center" }}
-						>Back</Button>
-						{bikes && <Button
-							variant="outlined"
-							color="error"
-							sx={{
-								float: "right"
-							}}
-							onClick={() => {
-								setBikes(null)
-								setToken("")
-							}}
-						>Logout</Button>}
+						<Container maxWidth="sm">
+							<Button
+								href="/"
+								LinkComponent={NextLink}
+								variant="outlined"
+								style={{ textAlign: "center" }}
+							>Back</Button>
+							{bikes && <Button
+								variant="outlined"
+								color="error"
+								sx={{
+									float: "right"
+								}}
+								onClick={() => {
+									setBikes(null)
+									setToken("")
+								}}
+							>Logout</Button>}
+						</Container>
 						{!bikes && <div>
 							<Container maxWidth="sm">
 								<Box sx={{
-									marginTop: 8,
+									marginTop: 4,
 									display: 'flex',
 									flexDirection: 'column',
 									alignItems: 'center',

@@ -8,10 +8,13 @@ import theme from "@/components/theme";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import NextLink from "next/link";
 import Link from "@mui/material/Link";
+import { useRef } from "react";
+import Button from "@mui/material/Button";
 
 export default function Home() {
 
 	const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+	const fileUpload = useRef<HTMLInputElement>(null)
 
 	return (
 		<>
@@ -27,10 +30,20 @@ export default function Home() {
 				<main>
 					<div className={styles.main}>
 						<h1 style={{ textAlign: "center" }}>Encryption Key Viewer</h1>
+						<Button
+							href="/"
+							LinkComponent={NextLink}
+							variant="outlined"
+							style={{ textAlign: "center" }}
+						>
+							Back
+						</Button>
 						<p>
 							View your encryption keys. The file you need to open is the same file
 							that you can download on the <Link href="/account" component={NextLink}>account page</Link>.
 						</p>
+						<input type="file" ref={fileUpload} hidden />
+						<Button onClick={() => {fileUpload.current?.click()}} variant="contained">Choose file</Button>
 						<Footer />
 					</div>
 				</main>

@@ -40,6 +40,7 @@ import Footer from '@/components/Footer';
 import Bikes from '@/components/Bikes';
 import DownloadButton from '@/components/DownloadButton';
 import NextLink from "next/link";
+import Alert from '@mui/material/Alert';
 // import PlausibleProvider from 'next-plausible';
 
 export default function AccountPage() {
@@ -228,7 +229,7 @@ export default function AccountPage() {
 						</div>}
 						{bikes && <div>
 							{/* {(() => {console.log(typeof bikes, bikes); return null})()} */}
-							{typeof bikes !== "string" && <Bikes bikes={bikes} />}
+							{typeof bikes !== "string" && <Bikes bikes={bikes} fallback={<Alert severity="error">The bike data seems to be corrupt.</Alert>} />}
 							<Stack spacing={1} direction="row">
 								<DownloadButton
 									filename={"bikeData_" + (new Date()).toISOString().replaceAll(":", "-") + ".json"}

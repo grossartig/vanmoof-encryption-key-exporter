@@ -200,9 +200,9 @@ export default function AccountPage() {
 												<FormControlLabel control={<Checkbox onChange={() => {
 													setAckNotVanMoof(!ackNotVanMoof)
 												}} checked={ackNotVanMoof} />} label={<>
-													I acknowledge that this tool is not affiliated with VanMoof B.V. and is a
-													service offered by grossartig.io - it is provided by a third party to
-													export the encryption keys of VanMoof bikes, for this the VanMoof login
+													I acknowledge, that this tool is <b>not</b> affiliated with VanMoof B.V. and is a
+													service offered by grossartig.io - it is provided to
+													export the encryption keys of VanMoof bikes. For this, the VanMoof login
 													is necessary.
 												</>} />
 												<FormControlLabel control={<Checkbox onChange={() => {

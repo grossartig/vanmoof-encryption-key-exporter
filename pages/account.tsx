@@ -65,6 +65,7 @@ export default function AccountPage() {
 	const [errorPassword, setErrorPassword] = useState("")
 	const [errorLogin, setErrorLogin] = useState(false)
 	const [formDisabled, setFormDisabled] = useState(false)
+	const [ackNotVanMoof, setAckNotVanMoof] = useState<boolean>(false)
 	const [privacyPolicyAgreed, setPrivacyPolicyAgreed] = useState<boolean>(false)
 	const [easteregg, setEasteregg] = useState<number>(0)
 
@@ -178,6 +179,14 @@ export default function AccountPage() {
 											</Grid>
 											<Grid item xs={12}>
 												<FormControlLabel control={<Checkbox onChange={() => {
+													setAckNotVanMoof(!ackNotVanMoof)
+												}} checked={ackNotVanMoof} />} label={<>
+													I acknowledge that this tool is not affiliated with VanMoof B.V. and is a
+													service offered by grossartig.io - it is provided by a third party to
+													export the encryption keys of VanMoof bikes, for this the VanMoof login
+													is necessary.
+												</>} />
+												<FormControlLabel control={<Checkbox onChange={() => {
 													setPrivacyPolicyAgreed(!privacyPolicyAgreed)
 												}} checked={privacyPolicyAgreed} />} label={<>
 													I agree to the <Link href="https://grossartig.io/keyexport/privacy" target="_blank">data privacy policy</Link>.
@@ -185,7 +194,7 @@ export default function AccountPage() {
 											</Grid>
 											<Grid item xs={12}>
 												<Button
-													disabled={formDisabled || !privacyPolicyAgreed}
+													disabled={formDisabled || !privacyPolicyAgreed || !ackNotVanMoof}
 													type="submit"
 													fullWidth
 													variant="contained"

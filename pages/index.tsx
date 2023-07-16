@@ -11,6 +11,7 @@ import NextLink from "next/link";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { getTheme } from "@/components/theme";
+import Alert from "@mui/material/Alert";
 
 export default function Home() {
 	const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -32,6 +33,9 @@ export default function Home() {
 				{/* <PlausibleProvider domain="vanoof.grossartig.io" customDomain="https://plausible.grossartig.io" /> */}
 				<main>
 					<div className={styles.main}>
+						<div style={{ margin: "0 auto", maxWidth: "fit-content", marginBottom: "32px" }}>
+							<Alert variant="filled" severity="info" sx={{ textAlign: "center" }}>This tool is <b>not</b> affiliated with VanMoof B.V.</Alert>
+						</div>
 						<h1 style={{ textAlign: "center", paddingBottom: "32px" }} onClick={() => setEasteregg(easteregg + 1)}>VanMoof Encryption Key Exporter</h1>
 						<Stack direction={"column"} spacing={2} maxWidth={"400px"} sx={{ margin: "0 auto" }}>
 							<Button

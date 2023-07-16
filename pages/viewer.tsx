@@ -14,12 +14,14 @@ import { bikeDetails } from "./api/typesAndInterfaces";
 import GenericErrorBoundary from "@/components/GenericErrorBoundary";
 import Bikes from "@/components/Bikes";
 import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
 
 export default function Home() {
 
 	const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 	const theme = useMemo(() => getTheme(prefersDarkMode), [prefersDarkMode])
 	const fileUpload = useRef<HTMLInputElement>(null)
+	const [filename, setFilename] = useState<string>("")
 	const [error, setError] = useState<boolean>(false)
 	const [bikes, setBikes] = useState<bikeDetails[] | null>(null)
 	const onUpload = async (event: ChangeEvent<HTMLInputElement>) => {
@@ -29,6 +31,7 @@ export default function Home() {
 		const files = event.currentTarget.files
 		if (files && files?.length > 0) {
 			try {
+				setFilename(files[0].name)
 				const data = JSON.parse(await files[0].text())
 				setBikes(data)
 			} catch (e) {
@@ -63,7 +66,10 @@ export default function Home() {
 							View your encryption keys. The file you need to open is the same file
 							that you can download on the <Link href="/account" component={NextLink}>account page</Link>.
 						</p>
-						<Button onClick={() => {fileUpload.current?.click()}} variant="contained">Choose file</Button>
+						<Stack direction="row">
+							<Button onClick={() => {fileUpload.current?.click()}} variant="contained">Choose file</Button>
+							{filename && <div style={{ height: "100%", margin: "auto 0", marginLeft: "12px" }}>{filename}</div>}
+						</Stack>
 						<input
 							type="file"
 							ref={fileUpload}

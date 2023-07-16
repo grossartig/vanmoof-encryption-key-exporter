@@ -4,11 +4,11 @@ import Head from "next/head";
 import Script from "next/script";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Footer from "@/components/Footer";
-import theme from "@/components/theme";
+import { getTheme } from "@/components/theme";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import NextLink from "next/link";
 import Link from "@mui/material/Link";
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useMemo, useRef, useState } from "react";
 import Button from "@mui/material/Button";
 import { bikeDetails } from "./api/typesAndInterfaces";
 import GenericErrorBoundary from "@/components/GenericErrorBoundary";
@@ -18,6 +18,7 @@ import Alert from "@mui/material/Alert";
 export default function Home() {
 
 	const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+	const theme = useMemo(() => getTheme(prefersDarkMode), [prefersDarkMode])
 	const fileUpload = useRef<HTMLInputElement>(null)
 	const [error, setError] = useState<boolean>(false)
 	const [bikes, setBikes] = useState<bikeDetails[] | null>(null)
@@ -45,7 +46,7 @@ export default function Home() {
 				{/* <link rel="icon" href="/favicon.ico" /> */}
 			</Head>
 			<Script defer data-domain="vanoof.grossartig.io" src="https://plausible.grossartig.io/js/script.js" />
-			<ThemeProvider theme={theme(prefersDarkMode)}>
+			<ThemeProvider theme={theme}>
 				<CssBaseline />
 				<main>
 					<div className={styles.main}>

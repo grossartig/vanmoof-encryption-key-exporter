@@ -4,12 +4,14 @@ import Head from "next/head";
 import Script from "next/script";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Footer from "@/components/Footer";
-import theme from "@/components/theme";
 import useMediaQuery from "@mui/material/useMediaQuery";
+import { getTheme } from "@/components/theme";
+import { useMemo } from "react";
 
 export default function Home() {
 
 	const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+	const theme = useMemo(() => getTheme(prefersDarkMode), [prefersDarkMode])
 
 	return (
 		<>
@@ -20,7 +22,7 @@ export default function Home() {
 				{/* <link rel="icon" href="/favicon.ico" /> */}
 			</Head>
 			<Script defer data-domain="vanoof.grossartig.io" src="https://plausible.grossartig.io/js/script.js" />
-			<ThemeProvider theme={theme(prefersDarkMode)}>
+			<ThemeProvider theme={theme}>
 				<CssBaseline />
 				<main>
 					<div className={styles.main}>

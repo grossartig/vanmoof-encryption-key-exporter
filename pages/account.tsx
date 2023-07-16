@@ -41,23 +41,12 @@ import Bikes from '@/components/Bikes';
 import DownloadButton from '@/components/DownloadButton';
 import NextLink from "next/link";
 import Alert from '@mui/material/Alert';
+import { getTheme } from '@/components/theme';
 // import PlausibleProvider from 'next-plausible';
 
 export default function AccountPage() {
 	const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
-	const theme = useMemo(
-		() =>
-			createTheme({
-				palette: {
-					primary: {
-						main: prefersDarkMode ? indigo[300] : indigo[900],
-					},
-					secondary: deepOrange,
-					mode: prefersDarkMode ? 'dark' : 'light',
-				},
-			}),
-		[prefersDarkMode],
-	)
+	const theme = useMemo(() => getTheme(prefersDarkMode), [prefersDarkMode])
 
 	const [token, setToken] = useLocalStorageString("vanmoofToken")
 	const [bikes, setBikes] = useState<Array<bikeDetails> | null>(null)

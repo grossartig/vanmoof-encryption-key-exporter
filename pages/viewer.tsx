@@ -8,13 +8,33 @@ import theme from "@/components/theme";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import NextLink from "next/link";
 import Link from "@mui/material/Link";
-import { useRef } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import Button from "@mui/material/Button";
+import { bikeDetails } from "./api/typesAndInterfaces";
+import GenericErrorBoundary from "@/components/GenericErrorBoundary";
+import Bikes from "@/components/Bikes";
+import Alert from "@mui/material/Alert";
 
 export default function Home() {
 
 	const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
 	const fileUpload = useRef<HTMLInputElement>(null)
+	const [error, setError] = useState<boolean>(false)
+	const [bikes, setBikes] = useState<bikeDetails[] | null>(null)
+	const onUpload = async (event: ChangeEvent<HTMLInputElement>) => {
+		setError(false)
+		setBikes(null)
+		console.log(event.currentTarget.files)
+		const files = event.currentTarget.files
+		if (files && files?.length > 0) {
+			try {
+				const data = JSON.parse(await files[0].text())
+				setBikes(data)
+			} catch (e) {
+				setError(true)
+			}
+		}
+	}
 
 	return (
 		<>
@@ -42,8 +62,21 @@ export default function Home() {
 							View your encryption keys. The file you need to open is the same file
 							that you can download on the <Link href="/account" component={NextLink}>account page</Link>.
 						</p>
-						<input type="file" ref={fileUpload} hidden />
 						<Button onClick={() => {fileUpload.current?.click()}} variant="contained">Choose file</Button>
+						<input
+							type="file"
+							ref={fileUpload}
+							hidden
+							onChange={onUpload}
+						/>
+						<div style={{ marginTop: "24px" }}>
+							{error && <Alert severity="error">An error has occurred. The bike data may be corrupt.</Alert>}
+							{bikes &&
+								<GenericErrorBoundary fallback={<p>Something went wrong.</p>}>
+									<Bikes bikes={bikes} fallback={<Alert severity="error">The bike data seems to be corrupt.</Alert>} />
+								</GenericErrorBoundary>
+							}
+						</div>
 						<Footer />
 					</div>
 				</main>

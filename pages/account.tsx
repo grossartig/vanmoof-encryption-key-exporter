@@ -251,7 +251,7 @@ export default function AccountPage() {
 							<Stack spacing={1} direction="row">
 								<DownloadButton
 									filename={"bikeData_" + (new Date()).toISOString().replaceAll(":", "-") + ".json"}
-									content={JSON.stringify(bikes)}
+									contentObject={bikes}
 									buttonText="Download"
 								/>
 								<Button variant="outlined" onClick={() => {

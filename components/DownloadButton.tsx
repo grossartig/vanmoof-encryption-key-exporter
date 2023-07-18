@@ -2,10 +2,11 @@ import Button from "@mui/material/Button"
 
 export default function DownloadButton(props: {
 	filename: string,
-	content: string,
+	content?: string,
+	contentObject?: any,
 	buttonText: string
 }) {
-	const { filename, content, buttonText } = props
+	const { filename, content, contentObject, buttonText } = props
 
 	return (
 		<Button variant="contained" onClick={() => {
@@ -18,7 +19,8 @@ export default function DownloadButton(props: {
 				element.click()
 				document.body.removeChild(element)
 			}
-			download(filename, content)
+			const text = content || JSON.stringify(contentObject)
+			download(filename, text)
 		}}>Download</Button>
 	)
 }

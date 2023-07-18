@@ -28,7 +28,7 @@ function useLocalStorageString(
 	initialValue?: string,
 ): [string, (state: string) => void] {
 	const localStorageSupported = typeof window === "object" && typeof window.localStorage === "object"
-	const [firstRun, setFirstRun] = useState()
+	const [firstRun, setFirstRun] = useState<boolean>(true)
 	const [value, setValue] = useState<string>("")
 
 	const setState = (newState: string) => {
@@ -45,6 +45,7 @@ function useLocalStorageString(
 		} else {
 			setState(initialValue || "")
 		}
+		setFirstRun(false)
 	}
 
 	return [value, setState]

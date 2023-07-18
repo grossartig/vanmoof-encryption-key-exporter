@@ -36,7 +36,7 @@ export default function CreateCertificate(props: {
 				bikeId
 			})
 		})
-		let data: unknown = null
+		let data: string = ""
 		try {
 			data = await res.text()
 			if (typeof data === "string") {
@@ -46,6 +46,7 @@ export default function CreateCertificate(props: {
 				publicKey,
 				privateKey
 			}
+			bike.xCertificate = data
 			console.log(data)
 		} catch (e: any) {
 			console.error(e)

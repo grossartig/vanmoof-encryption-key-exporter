@@ -40,7 +40,7 @@ export default function Bikes(props: {
 								{ viewerMode ? <>
 									Go to the <Link href="/account" component={NextLink}>account page</Link> to generate and upload a keypair.
 								</> : <>
-									<CreateCertificate appToken={appToken} bikeId={bike?.bikeId} bike={bike} />
+									{ !bike?.xCertificate && <CreateCertificate appToken={appToken} bikeId={bike?.bikeId} bike={bike} /> }
 								</>}
 							</li> }
 							{ !bike?.key && bike?.xKeypair && bike?.xCertificate && <>
@@ -51,7 +51,7 @@ export default function Bikes(props: {
 										<ul>
 											<li>Created at: <code>{bike.xCertificate.created_at}</code></li>
 											<li>Expiry: <code>{bike.xCertificate.expiry}</code></li>
-											<li>Certificate:<br />{bike.xCertificate.certificate}</li>
+											<li>Certificate:<br /><code>{bike.xCertificate.certificate}</code></li>
 										</ul>
 									</li> }
 								</ul>

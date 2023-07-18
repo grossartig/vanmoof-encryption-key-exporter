@@ -40,7 +40,7 @@ export default function Bikes(props: {
 								{ viewerMode ? <>
 									Go to the <Link href="/account" component={NextLink}>account page</Link> to generate and upload a keypair.
 								</> : <>
-									{ !bike?.xCertificate && <CreateCertificate appToken={appToken} bikeId={bike?.bikeId} bike={bike} /> }
+									{ (!bike?.xCertificate || typeof bike?.xCertificate === "string") && <CreateCertificate appToken={appToken} bikeId={bike?.bikeId} bike={bike} /> }
 								</>}
 							</li> }
 							{ !bike?.key && bike?.xKeypair && bike?.xCertificate && <>

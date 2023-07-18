@@ -23,10 +23,10 @@ export default async function handler(
 				"public_key": publicKey
 			})
 		})
-		const data: unknown = await r.text()
+		const data: unknown = await r.json()
 		if (r.status < 400) {
 			res.statusCode = 200
-			return res.send(data)
+			return res.json(data)
 		} else {
 			res.statusCode = r.status
 			return res.send("Error " + r.status)

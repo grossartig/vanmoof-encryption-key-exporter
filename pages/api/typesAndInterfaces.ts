@@ -144,9 +144,14 @@ export interface bikeDetails {
 	},
 	xKeypair?: { // this is not in the response from VanMoof. This is added later.
 		privateKey: string, // base64 encoded ed25519 private key
-		publicKey: string // base64 encoded ed25519 public key
+		publicKey: string, // base64 encoded ed25519 public key
+		comment?: string
 	},
-	xCertificate?: string,
+	xCertificate?: {
+		created_at: string,
+		expiry: string,
+		certificate: string
+	} | string
 	isFactoryKey: boolean,
 	customerCount: number,
 	invitationCount: number,

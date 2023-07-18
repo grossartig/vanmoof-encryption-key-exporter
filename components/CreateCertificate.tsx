@@ -36,17 +36,25 @@ export default function CreateCertificate(props: {
 				bikeId
 			})
 		})
-		let data: string = ""
+		let data: { created_at: string, expiry: string, certificate: string } | string | null = null
 		try {
-			data = await res.text()
-			if (typeof data === "string") {
+			const rawData = await res.text()
+			try {
+				data = await JSON.parse(rawData)
+			} catch (e) {
+				console.error(e)
+				data = rawData
+			}
+			// data = await res.json()
+			if (typeof data === "object" && data != null) {
 				bike.xCertificate = data
 			}
 			bike.xKeypair = {
 				publicKey,
-				privateKey
+				privateKey,
+				comment: "Important, this is just the generated keypair. You still need the certificate which is stored in xCertificate."
 			}
-			bike.xCertificate = data
+			// bike.xCertificate = data
 			console.log(data)
 		} catch (e: any) {
 			console.error(e)
@@ -59,14 +67,17 @@ export default function CreateCertificate(props: {
 
 	useEffect(() => {
 		let msg = ""
-		if (!publicKey) msg = "Generating Keypair..."
-		if (!bike?.xCertificate) msg = "Upload Key"
-		if (bike?.xCertificate?.startsWith("Error")) msg = "Error. Try again."
-
-		if (!msg) msg = "Upload Key"
+		if (loading) msg = "Loading..."
+		else if (
+			(typeof bike?.xCertificate === "string" && bike?.xCertificate?.startsWith("Error")) ||
+			(bike?.xKeypair && !bike?.xCertificate)
+			) msg = "Error. Try again."
+		else if (!bike?.xCertificate) msg = "Upload Key"
+		else if (!publicKey) msg = "Generating Keypair..."
+		else msg = "Upload Key"
 
 		setButtonText(msg)
-	}, [publicKey, bike?.xCertificate])
+	}, [publicKey, bike?.xCertificate, bike?.xKeypair])
 
 	return (
 		<Button

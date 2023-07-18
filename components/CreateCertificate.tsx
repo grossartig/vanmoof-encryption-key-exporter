@@ -77,7 +77,7 @@ export default function CreateCertificate(props: {
 		else msg = "Upload Key"
 
 		setButtonText(msg)
-	}, [publicKey, bike?.xCertificate, bike?.xKeypair])
+	}, [publicKey, bike?.xCertificate, bike?.xKeypair, loading])
 
 	return (
 		<Button

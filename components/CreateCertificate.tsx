@@ -22,6 +22,7 @@ export default function CreateCertificate(props: {
 			setPublicKey(Buffer.from(pubkey).toString("base64"))
 			setRenderTrigger(!renderTrigger)
 		})()
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 
 	const upload = async (bikeId: string, bike: bikeDetails) => {

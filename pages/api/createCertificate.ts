@@ -15,8 +15,9 @@ export default async function handler(
 			method: "POST",
 			headers: {
 				// "Api-Key": API_KEY,
-				"Authorization": `Bearer ${token}`,
+				"Authorization": `${token}`,
 				"User-Agent": "VanMoof/20 CFNetwork/1404.0.5 Darwin/22.3.0",
+				"Content-Type": "application/json"
 			},
 			body: JSON.stringify({
 				"public_key": publicKey

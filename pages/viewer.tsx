@@ -80,7 +80,7 @@ export default function Home() {
 							{error && <Alert severity="error">An error has occurred. The bike data may be corrupt.</Alert>}
 							{bikes &&
 								<GenericErrorBoundary fallback={<p>Something went wrong.</p>}>
-									<Bikes bikes={bikes} fallback={<Alert severity="error">The bike data seems to be corrupt.</Alert>} />
+									<Bikes viewerMode bikes={bikes} fallback={<Alert severity="error">The bike data seems to be corrupt.</Alert>} />
 								</GenericErrorBoundary>
 							}
 						</div>

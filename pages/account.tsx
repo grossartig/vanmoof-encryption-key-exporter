@@ -50,6 +50,7 @@ export default function AccountPage() {
 
 	const [token, setToken] = useLocalStorageString("vanmoofToken")
 	const [bikes, setBikes] = useState<Array<bikeDetails> | null>(null)
+	const [appToken, setAppToken] = useLocalStorageString("vanmoofAppToken")
 	const [refresh, setRefresh] = useState<boolean>(false)
 	const [username, setUsername] = useState<string>("")
 	const [password, setPassword] = useState<string>("")
@@ -58,26 +59,42 @@ export default function AccountPage() {
 	const [formDisabled, setFormDisabled] = useState(false)
 	const [ackNotVanMoof, setAckNotVanMoof] = useState<boolean>(false)
 	const [privacyPolicyAgreed, setPrivacyPolicyAgreed] = useState<boolean>(false)
+	const [renderTrigger, setRenderTrigger] = useState<boolean>(false)
 	const [easteregg, setEasteregg] = useState<number>(0)
 
+	async function getToken(username: string, password: string) {
+		const res = await fetch("/api/authenticate", {
+			method: "POST",
+			body: JSON.stringify({
+				username,
+				password
+			})
+		})
+		const data: {
+			token: string,
+			refreshToken: string
+		} = await res.json()
+		return data
+	}
+	async function getAppToken(token: string) {
+		const res = await fetch("/api/getApplicationToken", {
+			method: "GET",
+			headers: {
+				"Authorization": token
+			}
+		})
+		const data: {
+			token: string
+		} = await res.json()
+		return data
+	}
 	const handleSubmit = async (e: any) => {
 		e.preventDefault()
-		async function getToken(username: string, password: string) {
-			const res = await fetch("/api/authenticate", {
-				method: "POST",
-				body: JSON.stringify({
-					username,
-					password
-				})
-			})
-			const data: {
-				token: string,
-				refreshToken: string
-			} = await res.json()
-			return data
-		}
 		try {
-			setToken((await getToken(username, password)).token)
+			const { token } = await getToken(username, password)
+			setToken(token)
+			const appToken = await getAppToken(token)
+			setAppToken(appToken.token)
 		} catch (e) {
 			setErrorLogin(true)
 		}
@@ -121,6 +138,9 @@ export default function AccountPage() {
 				{/* <PlausibleProvider domain="vanoof.grossartig.io" customDomain="https://plausible.grossartig.io" /> */}
 				<main>
 					<div className={styles.main}>
+						{/* <Button onClick={() => {
+							getAppToken(token)
+						}}>Debug</Button> */}
 						<h1 style={{ textAlign: "center" }} onClick={() => setEasteregg(easteregg + 1)}>VanMoof Encryption Key Exporter</h1>
 						<Container maxWidth="sm">
 							<Button
@@ -138,6 +158,8 @@ export default function AccountPage() {
 								onClick={() => {
 									setBikes(null)
 									setToken("")
+									setAppToken("")
+									setRenderTrigger(!renderTrigger)
 								}}
 							>Logout</Button>}
 						</Container>
@@ -220,7 +242,12 @@ export default function AccountPage() {
 						</div>}
 						{bikes && <div>
 							{/* {(() => {console.log(typeof bikes, bikes); return null})()} */}
-							{typeof bikes !== "string" && <Bikes bikes={bikes} fallback={<Alert severity="error">The bike data seems to be corrupt.</Alert>} />}
+							{ typeof bikes !== "string" && <Bikes
+								bikes={bikes}
+								fallback={<Alert severity="error">The bike data seems to be corrupt.</Alert>}
+								generateButton={null}
+								appToken={appToken}
+							/>}
 							<Stack spacing={1} direction="row">
 								<DownloadButton
 									filename={"bikeData_" + (new Date()).toISOString().replaceAll(":", "-") + ".json"}

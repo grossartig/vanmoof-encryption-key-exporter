@@ -87,7 +87,7 @@ export interface bikeDetails {
 	tripDistance: number,
 	pendingSmartmoduleMacAddress: null,
 	macAddress: string,
-	mainEcuSerial: null,
+	mainEcuSerial: null | string,
 	smartmoduleCurrentVersion: string, // SemVer?
 	smartmoduleDesiredVersion: null,
 	changeBackupCode: false,
@@ -137,11 +137,16 @@ export interface bikeDetails {
 		// "READ_VALUES",
 		// "STOLEN_MODE",
 		// "SWAP_SMARTMODULE"
-	key: {
+	key?: {
 		encryptionKey: string // 32 hex chars e.g. "abababababababababababababababab"
 		passcode: string, // 12 hex chars e.g. "abababababab",
 		userKeyId: number // 1
 	},
+	xKeypair?: { // this is not in the response from VanMoof. This is added later.
+		privateKey: string, // base64 encoded ed25519 private key
+		publicKey: string // base64 encoded ed25519 public key
+	},
+	xCertificate?: string,
 	isFactoryKey: boolean,
 	customerCount: number,
 	invitationCount: number,

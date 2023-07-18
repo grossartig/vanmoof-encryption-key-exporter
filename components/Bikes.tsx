@@ -46,6 +46,7 @@ export default function Bikes(props: {
 								<ul>
 									{ bike.xKeypair.privateKey && <li>Private Key: <code>{bike.xKeypair.privateKey}</code></li> }
 									{ bike.xKeypair.publicKey && <li>Public Key: <code>{bike.xKeypair.publicKey}</code></li> }
+									{ bike.xCertificate && <li>Certificate:<br /><code>{bike.xCertificate}</code></li> }
 								</ul>
 							</li> }
 						</ul>

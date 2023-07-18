@@ -14,7 +14,8 @@ export default async function handler(
 			method: "GET",
 			headers: {
 				"Api-Key": API_KEY,
-				"Authorization": `Bearer ${token}`
+				"Authorization": `Bearer ${token}`,
+				"User-Agent": "VanMoof/20 CFNetwork/1404.0.5 Darwin/22.3.0"
 			}
 		})
 		const data: getCustomerData = await r.json()

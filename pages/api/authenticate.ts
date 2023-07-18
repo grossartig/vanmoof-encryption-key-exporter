@@ -13,7 +13,8 @@ export default async function handler(
 			method: "POST",
 			headers: {
 				"Api-Key": API_KEY,
-				"Authorization": `Basic ${Buffer.from(`${username}:${password}`).toString("base64")}`
+				"Authorization": `Basic ${Buffer.from(`${username}:${password}`).toString("base64")}`,
+				"User-Agent": "VanMoof/20 CFNetwork/1404.0.5 Darwin/22.3.0"
 			}
 		})
 		const data: {

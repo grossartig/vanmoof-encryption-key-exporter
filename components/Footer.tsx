@@ -18,7 +18,7 @@ export default function Footer() {
 				<br /><br />
 				&copy; grossartig.io, 2023
 				<br /><br />
-				Verion: v{ publicRuntimeConfig.version }
+				Version: v{ publicRuntimeConfig.version }
 			</div>
 		</footer>
 	)

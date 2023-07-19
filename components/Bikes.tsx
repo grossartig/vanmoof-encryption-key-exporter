@@ -25,7 +25,8 @@ export default function Bikes(props: {
 		appToken
 	} = props
 
-	const trigger = props.trigger || useState<number>(0)
+	const altTrigger = useState<number>(0)
+	const trigger = props.trigger || altTrigger
 	let parsedBikes: React.ReactNode[] | null = []
 
 	try {

@@ -4,13 +4,18 @@ import Alert from "@mui/material/Alert"
 import NextLink from "next/link"
 import Link from "@mui/material/Link"
 import CreateCertificate from "./CreateCertificate"
+import { Dispatch, SetStateAction, useState } from "react"
 
 export default function Bikes(props: {
 	bikes: bikeDetails[]
 	fallback?: React.ReactNode
 	viewerMode?: boolean,
 	generateButton?: React.ReactNode,
-	appToken?: string
+	appToken?: string,
+	trigger?: [
+		trigger: number,
+		setTrigger: Dispatch<SetStateAction<number>>
+	]
 }) {
 	const {
 		bikes,
@@ -20,6 +25,7 @@ export default function Bikes(props: {
 		appToken
 	} = props
 
+	const trigger = props.trigger || useState<number>(0)
 	let parsedBikes: React.ReactNode[] | null = []
 
 	try {
@@ -40,7 +46,7 @@ export default function Bikes(props: {
 								{ viewerMode ? <>
 									Go to the <Link href="/account" component={NextLink}>account page</Link> to generate and upload a keypair.
 								</> : <>
-									{ (!bike?.xCertificate || typeof bike?.xCertificate === "string") && <CreateCertificate appToken={appToken} bikeId={bike?.bikeId} bike={bike} /> }
+									{ (!bike?.xCertificate || typeof bike?.xCertificate === "string") && <CreateCertificate appToken={appToken} bikeId={bike?.bikeId} bike={bike} trigger={trigger} /> }
 								</>}
 							</li> }
 							{ !bike?.key && bike?.xKeypair && bike?.xCertificate && <>

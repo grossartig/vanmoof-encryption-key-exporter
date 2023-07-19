@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react"
+import { Dispatch, SetStateAction, useEffect, useMemo, useState } from "react"
 import * as ed from "@noble/ed25519"
 import Button from "@mui/material/Button"
 import { bikeDetails } from "@/pages/api/typesAndInterfaces"
@@ -7,11 +7,15 @@ export default function CreateCertificate(props: {
 	appToken?: string,
 	bikeId: string | number
 	bike: bikeDetails
+	trigger: [
+		trigger: number,
+		setTrigger: Dispatch<SetStateAction<number>>
+	]
 }) {
 	const { appToken, bike } = props
 	const [privateKey, setPrivateKey] = useState<string>("")
 	const [publicKey, setPublicKey] = useState<string>("")
-	const [renderTrigger, setRenderTrigger] = useState<boolean>(false)
+	const [trigger, setTrigger] = props.trigger
 	const [loading, setLoading] = useState<boolean>(false)
 
 	useMemo(() => {
@@ -20,7 +24,7 @@ export default function CreateCertificate(props: {
 			const pubkey = await ed.getPublicKeyAsync(privkey)
 			setPrivateKey(Buffer.from(privkey).toString("base64"))
 			setPublicKey(Buffer.from(pubkey).toString("base64"))
-			setRenderTrigger(!renderTrigger)
+			setTrigger(trigger + 1)
 		})()
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
@@ -55,6 +59,7 @@ export default function CreateCertificate(props: {
 				comment: "Important, this is just the generated keypair. You still need the certificate which is stored in xCertificate."
 			}
 			// bike.xCertificate = data
+			setTrigger(trigger + 1)
 			console.log(data)
 		} catch (e: any) {
 			console.error(e)
